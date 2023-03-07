@@ -18,5 +18,10 @@ namespace cv_5_h
         }
         private int MaxCargo { get; set; }
         private int Cargo { get; set; }
+
+        public override string ToString()
+        {
+            return $"Tank capacity is {TankCapacity}\nStatus of tank is {TankStatus}\nFuel is {Fuel}\nMaximus cargo is {MaxCargo}\nCurrent cargo is {Cargo}";
+        }
     }
 }

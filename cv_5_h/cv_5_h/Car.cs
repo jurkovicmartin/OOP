@@ -14,7 +14,7 @@ namespace cv_5_h
         }
 
         protected int TankCapacity { get; set; }
-        protected int TankStatus { get; set; }
+        protected int TankStatus { get { return TankStatus; } set { TankStatus = value; } }
         protected FuelType Fuel { get; set; }
 
         public void Refuel(FuelType fuel, int amount)

@@ -18,5 +18,10 @@ namespace cv_5_h
         }
         private int MaxPassengers { get; set; }
         private int Passengers { get { return Passengers; } set { if (value > MaxPassengers) throw new ArgumentException("Error, the car is full");} }
+
+        public override string ToString()
+        {
+            return $"Tank capacity is {TankCapacity}\nStatus of tank is {TankStatus}\nFuel is {Fuel}\nPassengers capacity is {MaxPassengers}\nCurrent pasangers are {Passengers}";
+        }
     }
 }

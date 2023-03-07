@@ -8,6 +8,9 @@ namespace cv_5_h
         {
             Console.WriteLine("Hello World!");
 
+            Truck dodavka = new Truck(Car.FuelType.Oil, 35, 10);
+
+            Console.WriteLine(dodavka.ToString());
         }
     }
 }
