@@ -22,6 +22,21 @@ namespace cv11.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("StudentSubject", b =>
+                {
+                    b.Property<int>("StudentsStudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectsSubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentsStudentId", "SubjectsSubjectId");
+
+                    b.HasIndex("SubjectsSubjectId");
+
+                    b.ToTable("StudentSubject");
+                });
+
             modelBuilder.Entity("cv11.DAL.MODELS.Student", b =>
                 {
                     b.Property<int>("StudentId")
@@ -48,19 +63,6 @@ namespace cv11.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("cv11.DAL.MODELS.StudentSubject", b =>
-                {
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("StudentId", "SubjectId");
-
-                    b.ToTable("StudentSubjects");
-                });
-
             modelBuilder.Entity("cv11.DAL.MODELS.Subject", b =>
                 {
                     b.Property<int>("SubjectId")
@@ -82,6 +84,21 @@ namespace cv11.Migrations
                     b.HasKey("SubjectId");
 
                     b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("StudentSubject", b =>
+                {
+                    b.HasOne("cv11.DAL.MODELS.Student", null)
+                        .WithMany()
+                        .HasForeignKey("StudentsStudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("cv11.DAL.MODELS.Subject", null)
+                        .WithMany()
+                        .HasForeignKey("SubjectsSubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

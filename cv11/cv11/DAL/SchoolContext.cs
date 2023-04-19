@@ -12,7 +12,7 @@ namespace cv11.DAL
     {
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Student> Students { get; set; }
-        public DbSet<StudentSubject> StudentSubjects { get; set; }
+        //public DbSet<StudentSubject> StudentSubjects { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBUilder)
         {
@@ -21,10 +21,12 @@ namespace cv11.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<StudentSubject>()
-                        .HasKey(ss => new { ss.StudentId, ss.SubjectId });
+            //modelBuilder.Entity<StudentSubject>()
+            //            .HasKey(ss => new { ss.StudentId, ss.SubjectId });
 
-            /* TODO*/
+            modelBuilder.Entity<Student>()
+                        .HasMany<Subject>(ss => ss.Subjects)
+                        .WithMany(ss => ss.Students);
         }
 
         public void AddStudent(string name, string surname, DateTime date)
@@ -38,11 +40,11 @@ namespace cv11.DAL
             SaveChanges();
         }
 
-       public void AddStudentSubject(int studId, int subjId)
+       /*public void AddStudentSubject(int studId, int subjId)
         {
             StudentSubjects.Add(new StudentSubject() {StudentId = studId, SubjectId = subjId});
             SaveChanges();
-        }
+        }*/
 
         public IEnumerable<Student> StudentsOfSubjects(int subjId)
         {
